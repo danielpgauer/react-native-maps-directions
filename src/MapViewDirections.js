@@ -137,6 +137,7 @@ class MapViewDirections extends Component {
 					const route = json.routes[0];
 
 					return Promise.resolve({
+						bounds: route.bounds,
 						distance: route.legs.reduce((carry, curr) => {
 							return carry + curr.distance.value;
 						}, 0) / 1000,
@@ -144,7 +145,6 @@ class MapViewDirections extends Component {
 							return carry + curr.duration.value;
 						}, 0) / 60,
 						coordinates: this.decode(route.overview_polyline.points),
-						fare: route.fare
 					});
 
 				} else {
